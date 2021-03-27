@@ -13,7 +13,7 @@ public class Player
     [System.NonSerialized]
     public int selectedFact;
     [System.NonSerialized]
-    public Vector3 indicatorPosition;
+    public Vector2 indicatorPosition;
 }
 
 [System.Serializable]
@@ -89,7 +89,7 @@ public class GameControllerMain : MonoBehaviour
             player[i].button.interactable = false;
             player[i].indicator.enabled = false;
             player[i].selectedFact = 0;
-            player[i].indicatorPosition = player[i].indicator.rectTransform.position;
+            player[i].indicatorPosition = player[i].indicator.rectTransform.anchoredPosition;
         }
         SetActive_InputFields(true);
         ClearInputField_InputFields();
@@ -232,13 +232,13 @@ public class GameControllerMain : MonoBehaviour
             switch (falseFactPosition)
             {
                 case 1:
-                    falseFactY = buttonFact1.GetComponentInParent<RectTransform>().position.y;
+                    falseFactY = buttonFact1.GetComponentInParent<RectTransform>().anchoredPosition.y;
                     break;
                 case 2:
-                    falseFactY = buttonFact2.GetComponentInParent<RectTransform>().position.y;
+                    falseFactY = buttonFact2.GetComponentInParent<RectTransform>().anchoredPosition.y;
                     break;
                 case 3:
-                    falseFactY = buttonFact3.GetComponentInParent<RectTransform>().position.y;
+                    falseFactY = buttonFact3.GetComponentInParent<RectTransform>().anchoredPosition.y;
                     break;
                 default:
                     break;
@@ -277,7 +277,7 @@ public class GameControllerMain : MonoBehaviour
 
             //// Handle indicator positions
             // Get old position
-            Vector3 targetPos = player[p].indicatorPosition;
+            Vector2 targetPos = player[p].indicatorPosition;
             // Calculate new X positions of other indicators
             for (float xx = (targetPos.x + indicatorMargin); xx < (targetPos.x + player.Length*indicatorMargin); xx += indicatorMargin)
             {
@@ -294,13 +294,13 @@ public class GameControllerMain : MonoBehaviour
             switch (fact_nr)
             {
                 case 1:
-                    targetPos.y = buttonFact1.GetComponentInParent<RectTransform>().position.y;
+                    targetPos.y = buttonFact1.GetComponentInParent<RectTransform>().anchoredPosition.y;
                     break;
                 case 2:
-                    targetPos.y = buttonFact2.GetComponentInParent<RectTransform>().position.y;
+                    targetPos.y = buttonFact2.GetComponentInParent<RectTransform>().anchoredPosition.y;
                     break;
                 case 3:
-                    targetPos.y = buttonFact3.GetComponentInParent<RectTransform>().position.y;
+                    targetPos.y = buttonFact3.GetComponentInParent<RectTransform>().anchoredPosition.y;
                     break;
                 default:
                     // stay at current Y
@@ -331,7 +331,7 @@ public class GameControllerMain : MonoBehaviour
             if (!player[p].indicator.enabled)
             {
                 // Set initial indicator position
-                player[p].indicator.rectTransform.position = player[p].indicatorPosition;
+                player[p].indicator.rectTransform.anchoredPosition = player[p].indicatorPosition;
                 player[p].indicator.enabled = true;
             }
         }
@@ -354,17 +354,19 @@ public class GameControllerMain : MonoBehaviour
     {
         for (int i = 0; i < player.Length; i++)
         {
-            if (player[i].indicator.rectTransform.position != player[i].indicatorPosition)
+            if (player[i].indicator.rectTransform.anchoredPosition != player[i].indicatorPosition)
             {
-                Vector3 distance = player[i].indicatorPosition - player[i].indicator.rectTransform.position;
+                Vector2 distance = player[i].indicatorPosition - player[i].indicator.rectTransform.anchoredPosition;
                 if (distance.magnitude <= indicatorMoveSpeed)
                 {
-                    player[i].indicator.rectTransform.position = player[i].indicatorPosition;
+                    player[i].indicator.rectTransform.anchoredPosition = player[i].indicatorPosition;
                 }
                 else
                 {
-                    Vector3 move = Vector3.Normalize(distance)*indicatorMoveSpeed;
-                    player[i].indicator.rectTransform.position += move;
+                    Vector2 move = distance;
+                    move.Normalize();
+                    move *= indicatorMoveSpeed;
+                    player[i].indicator.rectTransform.anchoredPosition += move;
                 }
             }
         }

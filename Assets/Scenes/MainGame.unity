@@ -1961,7 +1961,7 @@ MonoBehaviour:
     indicator: {fileID: 1296027769}
     color: {r: 0.27450982, g: 0.85490197, b: 0.9607843, a: 0}
   indicatorMoveSpeed: 10
-  indicatorMarginStart: 1180
+  indicatorMarginStart: 220
   indicatorMargin: 60
   inputFieldTrue1: {fileID: 1599602713}
   inputFieldTrue2: {fileID: 1508281780}
