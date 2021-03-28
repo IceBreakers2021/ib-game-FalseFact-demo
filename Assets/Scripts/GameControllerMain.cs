@@ -34,7 +34,7 @@ public class InstructionTexts
 
 public class GameControllerMain : MonoBehaviour
 {
-    public GameManager gameManager; // Object for handling variables across scenes
+    private GameManager gameManager; // Object for handling variables across scenes
     public GameObject buttonConfirm;
     public Player[] player;
     public float indicatorMoveSpeed;
@@ -66,6 +66,31 @@ public class GameControllerMain : MonoBehaviour
 
     void Awake()
     {
+        // Look for and get the GameManager from previous scene
+        gameManager = GameObject.FindObjectOfType<GameManager>();
+        // Define default values (in case GameManager does not exist, e.g. when scene is launched without previous scene)
+        int playerNumber = player.Length;
+        // Set variables to inherited values from GameManager
+        if (gameManager != null)
+        {
+            playerNumber = gameManager.GetNumberPlayers() - 1;
+        }
+
+        // Initialize all players as disabled
+        for (int i = 0; i < player.Length; i++)
+        {
+            player[i].button.interactable = false;
+            player[i].indicator.enabled = false;
+            player[i].selectedFact = 0;
+            player[i].indicatorPosition = player[i].indicator.rectTransform.anchoredPosition;
+        }
+        // Set player number
+        if (playerNumber < player.Length)
+        {
+            System.Array.Resize(ref player, playerNumber);
+        }
+
+        // Go into first state
         GotoState_Input();
     }
 

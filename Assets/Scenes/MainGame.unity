@@ -1945,7 +1945,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c764a7b9d5eeecaf2a7c2949219b9092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
   buttonConfirm: {fileID: 1168786402}
   player:
   - button: {fileID: 1733815777}
@@ -1976,10 +1975,10 @@ MonoBehaviour:
   textInstructions: {fileID: 832705570}
   instructionTexts:
     input: Select a person who fills in the facts. The others should look away until
-      he or her confirms!
+      he or she confirms!
     guess: Discuss and vote for the fact you think is a lie. The person who filled
       in the facts should defend ALL facts!
-    result: The results!
+    result: Reveal the results!
 --- !u!4 &1107053571
 Transform:
   m_ObjectHideFlags: 0
