@@ -1962,6 +1962,7 @@ MonoBehaviour:
   indicatorMoveSpeed: 10
   indicatorMarginStart: 220
   indicatorMargin: 60
+  revealedWrongAlpha: 0.4
   inputFieldTrue1: {fileID: 1599602713}
   inputFieldTrue2: {fileID: 1508281780}
   inputFieldFalse1: {fileID: 659349399}

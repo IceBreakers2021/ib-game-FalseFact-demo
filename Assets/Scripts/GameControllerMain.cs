@@ -40,6 +40,7 @@ public class GameControllerMain : MonoBehaviour
     public float indicatorMoveSpeed;
     public float indicatorMarginStart;
     public float indicatorMargin;
+    public float revealedWrongAlpha;
     public GameObject inputFieldTrue1;
     public GameObject inputFieldTrue2;
     public GameObject inputFieldFalse1;
@@ -223,19 +224,23 @@ public class GameControllerMain : MonoBehaviour
     {
         if (toggle)
         {
-            buttonFact1.GetComponentInParent<Image>().color = factColors.trueColor;
-            buttonFact2.GetComponentInParent<Image>().color = factColors.trueColor;
-            buttonFact3.GetComponentInParent<Image>().color = factColors.trueColor;
+            Color c = factColors.trueColor;
+            c.a = revealedWrongAlpha;
+            buttonFact1.GetComponentInParent<Image>().color = c;
+            buttonFact2.GetComponentInParent<Image>().color = c;
+            buttonFact3.GetComponentInParent<Image>().color = c;
+            c = factColors.falseColor;
+            c.a = 1.0f;
             switch (falseFactPosition)
             {
                 case 1:
-                    buttonFact1.GetComponentInParent<Image>().color = factColors.falseColor;
+                    buttonFact1.GetComponentInParent<Image>().color = c;
                     break;
                 case 2:
-                    buttonFact2.GetComponentInParent<Image>().color = factColors.falseColor;
+                    buttonFact2.GetComponentInParent<Image>().color = c;
                     break;
                 case 3:
-                    buttonFact3.GetComponentInParent<Image>().color = factColors.falseColor;
+                    buttonFact3.GetComponentInParent<Image>().color = c;
                     break;
                 default:
                     break;
@@ -277,7 +282,7 @@ public class GameControllerMain : MonoBehaviour
                 }
                 else
                 {
-                    c.a = 0.4f;
+                    c.a = revealedWrongAlpha;
                 }
                 player[i].indicator.color = c;
             }
