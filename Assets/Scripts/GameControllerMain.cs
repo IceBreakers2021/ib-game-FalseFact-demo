@@ -91,6 +91,9 @@ public class GameControllerMain : MonoBehaviour
             System.Array.Resize(ref player, playerNumber);
         }
 
+        // Disable help text
+        textInstructions.enabled = false;
+
         // Go into first state
         GotoState_Input();
     }
@@ -477,5 +480,10 @@ public class GameControllerMain : MonoBehaviour
     public void OnClick_Fact3()
     {
         SelectFact(3, activePlayer);
+    }
+
+    public void OnClick_Help()
+    {
+        textInstructions.enabled = !textInstructions.enabled;
     }
 }
